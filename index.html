@@ -233,9 +233,7 @@
         </div>
 
         <aside class="profile" aria-labelledby="profile-name">
-        <div class="avatar" role="img" aria-label="Profile Image">
-  <img src="udayprofile.jpg" alt="Profile Image" style="width:130px; height:130px; border-radius:40%; border:3px solid #fff; object-fit:cover;">
-</div>
+     <div class="avatar" role="img" aria-label="Profile placeholder"> <!-- Placeholder avatar svg --> <svg src="udayprofile.jpg" alt="Profile Image" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"> <path d="M12 12a4 4 0 100-8 4 4 0 000 8z"/> <path d="M6 20a6 6 0 0112 0"/> </svg> </div>
 
           <h3 id="profile-name">Udaykiran Gali</h3>
           <p>Computer Science Student • Project-focused • Problem solver</p>
@@ -474,7 +472,7 @@
 
       <footer>
         <div>Made with ❤️ by <strong>Udaykiran Gali</strong> • <a href="https://github.com/galiudaykiran" target="_blank" rel="noopener">github.com/galiudaykiran</a></div>
-        <div style="margin-top:6px">Tip: Replace placeholder email with your real email and add a real profile image for best results.</div>
+        <div style="margin-top:6px"></div>
       </footer>
     </main>
   </div>
@@ -489,7 +487,7 @@
     const pdfPath = "udayresunme__latest.pdf"; // 🔹 replace with your actual path, e.g. "assets/udayprofile.pdf"
     const a = document.createElement('a');
     a.href = pdfPath;
-    a.download = "udayresunme__latest.pdf";
+    a.download = "udayresume.pdf";
     document.body.appendChild(a);
     a.click();
     a.remove();
