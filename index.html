@@ -1,10 +1,549 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-    <title>My First DevOps Web Page</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Udaykiran Gali — Portfolio</title>
+  <meta name="description" content="Portfolio of Udaykiran Gali — B.Tech 4th year Computer Science student. Projects: Face Recognition & Grouping, SmartDoc, SmartLocal Services, IoT RC Car, and more." />
+  <style>
+    /* -----------------------
+       Colorful professional single-file CSS
+       ----------------------- */
+    :root{
+      --bg: #0f1724;
+      --card: linear-gradient(135deg,#0ea5e9 0%, #7c3aed 50%, #ef4444 100%);
+      --glass: rgba(255,255,255,0.06);
+      --accent: #7c3aed;
+      --muted: rgba(255,255,255,0.75);
+      --glass-2: rgba(255,255,255,0.03);
+      --success: #22c55e;
+      --danger: #ef4444;
+      --shadow: 0 8px 30px rgba(2,6,23,0.7);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background: radial-gradient(1000px 400px at 10% 10%, rgba(124,58,237,0.12), transparent),
+                  radial-gradient(800px 300px at 90% 90%, rgba(14,165,233,0.08), transparent),
+                  var(--bg);
+      color:#e6eef8;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+    }
+
+    /* page container */
+    .wrap{
+      max-width:1100px;
+      margin:32px auto;
+      padding:28px;
+      border-radius:18px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(8px) saturate(120%);
+      border: 1px solid rgba(255,255,255,0.04);
+      overflow:hidden;
+    }
+
+    /* top bar */
+    header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      text-decoration:none;
+      color:inherit;
+    }
+    .logo{
+      width:56px;height:56px;border-radius:12px;
+      background: conic-gradient(from 120deg,#7c3aed,#06b6d4,#f97316,#f43f5e);
+      display:flex;align-items:center;justify-content:center;
+      box-shadow: 0 6px 20px rgba(124,58,237,0.18);
+      flex-shrink:0;
+    }
+    .logo svg{filter:drop-shadow(0 2px 8px rgba(2,6,23,0.5));}
+    .brand h1{font-size:18px;margin:0}
+    .brand p{margin:0;font-size:12px;color:var(--muted)}
+
+    nav{
+      display:flex;
+      gap:10px;
+      align-items:center;
+    }
+    .nav-link{
+      padding:8px 12px;border-radius:10px;text-decoration:none;color:var(--muted);
+      font-size:14px;
+    }
+    .nav-link:hover{background:var(--glass-2);color:#fff;transform:translateY(-2px)}
+    .btn-primary{
+      padding:10px 14px;border-radius:12px;background:linear-gradient(90deg,#7c3aed,#06b6d4);
+      color:white;text-decoration:none;font-weight:600;box-shadow:0 8px 22px rgba(76,29,149,0.18)
+    }
+
+    /* hero */
+    .hero{
+      display:grid;
+      grid-template-columns: 1fr 360px;
+      gap:28px;
+      margin-top:26px;
+      align-items:center;
+    }
+    .intro h2{font-size:28px;margin:0 0 8px 0}
+    .intro p.lead{margin:0 0 18px 0;color:rgba(230,238,248,0.9); font-size:15px}
+    .cta{display:flex;gap:12px;align-items:center}
+    .pill{
+      display:inline-flex;align-items:center;gap:10px;padding:8px 12px;border-radius:999px;background:linear-gradient(90deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01));
+      border:1px solid rgba(255,255,255,0.03);font-weight:600;font-size:13px;color:var(--muted)
+    }
+
+    /* profile card */
+    .profile{
+      background: linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:14px;padding:18px;border:1px solid rgba(255,255,255,0.03);
+      box-shadow: 0 10px 30px rgba(2,6,23,0.6);
+    }
+    .avatar{
+      width:110px;height:110px;border-radius:18px;display:flex;align-items:center;justify-content:center;
+      background: linear-gradient(135deg,#0ea5e9,#7c3aed);
+      margin:0 auto 12px auto; position:relative; overflow:hidden;
+    }
+    .avatar svg{width:64px;height:64px;opacity:0.96;transform:translateY(-3px)}
+    .profile h3{margin:0;text-align:center}
+    .profile p{margin:6px 0 8px 0;color:var(--muted);text-align:center;font-size:13px}
+    .socials{display:flex;gap:10px;justify-content:center;margin-top:10px}
+    .socials a{display:inline-flex;padding:8px;border-radius:10px;background:var(--glass);text-decoration:none;color:inherit;font-size:13px}
+
+    /* cards grid */
+    .grid{
+      display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:22px;
+    }
+    .card{
+      border-radius:12px;padding:14px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border:1px solid rgba(255,255,255,0.03);
+    }
+    .highlight{
+      display:flex;gap:12px;align-items:center;
+    }
+    .chip{padding:6px 10px;border-radius:999px;font-weight:600;background:rgba(255,255,255,0.03);font-size:13px}
+
+    /* skills */
+    .skills {display:flex;flex-direction:column;gap:12px}
+    .skill{
+      display:flex;flex-direction:column;gap:6px;
+    }
+    .skill .bar{
+      height:12px;border-radius:999px;background:rgba(255,255,255,0.05);overflow:hidden;
+    }
+    .bar > i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,#06b6d4,#7c3aed);}
+
+    /* projects */
+    .projects-list{display:flex;flex-direction:column;gap:12px}
+    .project{
+      padding:12px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));
+      display:flex;gap:14px;align-items:flex-start;border:1px solid rgba(255,255,255,0.03)
+    }
+    .project h4{margin:0;font-size:16px}
+    .project p{margin:6px 0 0 0;color:var(--muted);font-size:13px}
+    .project .meta{margin-top:10px;display:flex;gap:8px;flex-wrap:wrap}
+    .tag{font-size:12px;padding:6px 8px;border-radius:8px;background:rgba(255,255,255,0.03)}
+
+    /* timeline */
+    .timeline{display:flex;flex-direction:column;gap:10px}
+    .when{font-size:13px;color:var(--muted)}
+    .timeline-item{display:flex;gap:12px;align-items:flex-start}
+    .dot{width:10px;height:10px;border-radius:50%;background:linear-gradient(90deg,#7c3aed,#06b6d4);margin-top:6px}
+
+    /* contact */
+    .contact-form{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .contact-form input,.contact-form textarea{
+      width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit;
+      outline:none;font-size:14px;
+    }
+    .contact-form textarea{grid-column:1/3;min-height:120px;resize:vertical}
+    .btn-send{padding:10px 14px;border-radius:12px;border:none;background:linear-gradient(90deg,#06b6d4,#7c3aed);color:white;font-weight:700;cursor:pointer}
+
+    footer{margin-top:22px;text-align:center;color:var(--muted);font-size:13px;padding-top:12px;border-top:1px dashed rgba(255,255,255,0.03)}
+
+    /* responsive */
+    @media (max-width:980px){
+      .hero{grid-template-columns:1fr}
+      .grid{grid-template-columns:1fr}
+      .contact-form{grid-template-columns:1fr}
+      .avatar{margin-bottom:8px}
+    }
+
+    /* micro interactions */
+    a,button{transition:all .18s ease}
+    .project:hover{transform:translateY(-6px);box-shadow:0 14px 40px rgba(2,6,23,0.6)}
+    .btn-primary:hover{transform:translateY(-3px) scale(1.02)}
+  </style>
 </head>
 <body>
-    <h1>Hello, Uday kiran!</h1>
-    <p>This is my first static web page deployed using Docker.</p>
+  <div class="wrap" id="top">
+    <header>
+      <a class="brand" href="#top" title="Home — Udaykiran">
+        <div class="logo" aria-hidden="true">
+          <!-- lightning / U icon -->
+          <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M13 2L3 14h7l-1 8L21 10h-7l-1-8z"></path>
+          </svg>
+        </div>
+        <div>
+          <h1>Udaykiran Gali</h1>
+          <p>B.Tech 4th Year — Computer Science</p>
+        </div>
+      </a>
+
+      <nav aria-label="Main navigation">
+        <a class="nav-link" href="#about">About</a>
+        <a class="nav-link" href="#projects">Projects</a>
+        <a class="nav-link" href="#skills">Skills</a>
+        <a class="nav-link" href="#contact">Contact</a>
+        <a class="btn-primary" id="downloadResume">Download Resume</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="intro-heading">
+        <div class="intro">
+          <p class="pill">Computer Science • Full-stack • Machine Learning • Cloud</p>
+          <h2 id="intro-heading">Hi, I'm <span style="background:linear-gradient(90deg,#06b6d4,#7c3aed);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:800">Udaykiran Gali</span></h2>
+          <p class="lead">
+            I'm a B.Tech 4th year Computer Science student (ICFAI Tech School, Hyderabad) building practical AI & web systems — face recognition & grouping, document summarizers, full-stack apps, and ML models for real-world use.
+          </p>
+
+          <div class="cta">
+            <a class="pill" href="https://github.com/galiudaykiran" target="_blank" rel="noopener">GitHub → galiudaykiran</a>
+            <a class="pill" href="https://www.linkedin.com/in/udaykiran-gali-522925285/" target="_blank" rel="noopener">LinkedIn → udaykiran-gali</a>
+          </div>
+
+          <div style="margin-top:18px;display:flex;gap:10px;flex-wrap:wrap;">
+            <span class="chip">Available for internships & Full time Jobs</span>
+            <span class="chip">Interested: Buildings applications,ML, Computer Vision, Cloud</span>
+            
+          </div>
+        </div>
+
+        <aside class="profile" aria-labelledby="profile-name">
+        <div class="avatar" role="img" aria-label="Profile Image">
+  <img src="udayprofile.jpg" alt="Profile Image" style="width:130px; height:130px; border-radius:40%; border:3px solid #fff; object-fit:cover;">
+</div>
+
+          <h3 id="profile-name">Udaykiran Gali</h3>
+          <p>Computer Science Student • Project-focused • Problem solver</p>
+
+          <div class="socials" aria-label="Social links">
+            <a href="https://github.com/galiudaykiran" target="_blank" rel="noopener">GitHub</a>
+            <a href="https://www.linkedin.com/in/udaykiran-gali-522925285/" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="mailto:udaykiran.gali@example.com">Email</a>
+          </div>
+
+          <div style="margin-top:14px;text-align:center">
+            <a class="btn-primary" href="#projects">See Projects</a>
+          </div>
+        </aside>
+      </section>
+
+      <section id="about" style="margin-top:26px">
+        <div class="grid">
+          <div class="card">
+            <div class="highlight">
+              <div style="flex:1">
+                <h3>About me</h3>
+                <p style="margin-top:8px;color:var(--muted);font-size:14px">
+                  I'm a B.Tech final-year student passionate about building AI-powered real-world applications. I focus on practical ML, Computer Vision, full-stack web, and cloud deployment. I've participated in hackathons and built projects like face recognition grouping, SmartLocal Services, SmartDoc, and several internship-focused projects.
+                </p>
+
+                <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
+                  <span class="chip">Face Recognition</span>
+                  <span class="chip">Full-Stack</span>
+                  <span class="chip">Machine Learning</span>
+                  <span class="chip">Cloud & DevOps</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Education  & Experience </h3>
+            <div class="timeline" style="margin-top:10px">
+              <div class="timeline-item">
+                <div class="dot" aria-hidden="true"></div>
+                <div>
+                  <strong>B.Tech - Computer Science(CGPA : 8.5)  ,    2022-2026</strong>
+                  <div class="when">ICFAI Tech School, Hyderabad </div>
+                </div>
+              </div>
+
+              <div class="timeline-item">
+                <div class="dot" aria-hidden="true"></div>
+                <div>
+                  <strong>Intermediate - MPC(percentage : 97.1%) , 2020-2022</strong>
+                  <div class="when">Priyadharshini Junior College,Huzurnagar </div>
+                </div>
+              </div>
+
+                <div class="timeline-item">
+                <div class="dot" aria-hidden="true"></div>
+                <div>
+                  <strong>SSC  - (percentage : 93.1%) , 2019-2020</strong>
+                  <div class="when">Krishnaveni High School,Huzurnagar </div>
+                </div>
+              </div>
+
+              <div class="timeline-item">
+                <div class="dot" aria-hidden="true"></div>
+                <div>
+                  <strong> internship - Skillbanc, June 2024 – Aug 2024</strong>
+                  <div class="when"> 
+                            Developed Educational Content: Created and contributed to animated mathematics lessons using the Manim library in Python, simplifying complex concepts.
+                             
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="projects" style="margin-top:26px">
+        <h3>Selected Projects</h3>
+        <div class="projects-list" style="margin-top:12px">
+          <article class="project">
+            <div style="flex:1">
+              <h4>Face Recognition & Grouping</h4>
+              <p>Built a system to detect and group similar faces using face_recognition library. Improved accuracy and grouping heuristics for large photo sets.</p>
+              <div class="meta">
+                <span class="tag">Python</span><span class="tag">Computer Vision</span><span class="tag">face_recognition</span>
+                <a class="tag" href="https://github.com/galiudaykiran" target="_blank" rel="noopener">Repo</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project">
+            <div style="flex:1">
+              <h4> Document Hub (App)</h4>
+              <p>Designed and implemented a hub for managing, organizing, and searching documents with AI-powered features..</p>
+              <div class="meta">
+                <span class="tag">React</span><span class="tag">Node.js</span><span class="tag">OpenAI</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="project">
+            <div style="flex:1">
+              <h4>SmartLocal Services — Location-based aggregator</h4>
+              <p>Design and prototype for a multi-service aggregator focusing on local businesses and service discovery with location-aware recommendations.</p>
+              <div class="meta">
+                <span class="tag">Design</span><span class="tag">UX</span><span class="tag">Geo</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="project">
+            <div style="flex:1">
+              <h4>IoT Remote Controlled Car (Hackathon)</h4>
+              <p>IoT-based RC car prototype built during college hackathon — remote control, telemetry, and basic obstacle detection.</p>
+              <div class="meta">
+                <span class="tag">IoT</span><span class="tag">Arduino</span><span class="tag">MQTT</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="project">
+            <div style="flex:1">
+              <h4>Text-Recognition-in-Unstructured-Environments</h4>
+              <p>Built robust recognition models for extracting text from noisy and complex backgrounds.</p>
+              <div class="meta">
+                <span class="tag">Deep Learning</span><span class="tag">TensorFlow</span>
+              </div>
+            </div>
+          </article>
+
+         
+
+          
+          
+        
+        </div>
+      </section>
+
+      <section id="skills" style="margin-top:26px">
+        <div class="grid">
+          <div class="card">
+            <h3>Skills</h3>
+            <div class="skills" style="margin-top:12px">
+              <div class="skill">
+                <div style="display:flex;justify-content:space-between;font-weight:700">
+                  <span>Java/oops</span><span>90%</span>
+                </div>
+                <div class="bar"><i style="width:90%"></i></div>
+              </div>
+
+              <div class="skill">
+                <div style="display:flex;justify-content:space-between;font-weight:700">
+                  <span>Python</span><span>82%</span>
+                </div>
+                <div class="bar"><i style="width:70%"></i></div>
+              </div>
+
+              <div class="skill">
+                <div style="display:flex;justify-content:space-between;font-weight:700">
+                  <span>React / Frontend</span><span>78%</span>
+                </div>
+                <div class="bar"><i style="width:78%"></i></div>
+              </div>
+
+              <div class="skill">
+                <div style="display:flex;justify-content:space-between;font-weight:700">
+                  <span>Machine Learning</span><span>80%</span>
+                </div>
+                <div class="bar"><i style="width:80%"></i></div>
+              </div>
+
+              <div class="skill">
+                <div style="display:flex;justify-content:space-between;font-weight:700">
+                  <span>Cloud & DevOps</span><span>70%</span>
+                </div>
+                <div class="bar"><i style="width:70%"></i></div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Tools & Tech</h3>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">
+              <span class="chip">Git</span>
+              <span class="chip">Docker</span>
+              <span class="chip">AWS / GCP</span>
+              <span class="chip">TensorFlow / PyTorch</span>
+              <span class="chip">face_recognition</span>
+              <span class="chip">Node.js</span>
+              <span class="chip">React</span>
+              <span class="chip">Tailwind</span>
+            </div>
+
+            <h4 style="margin-top:14px">Certificates</h4>
+            <p style="color:var(--muted);font-size:14px"> <ul>
+      <li>AWS Academy Graduate – AWS Academy Cloud Foundations</li>
+      <li>Data Processing and Visualisation – NASSCOM</li>
+      <li>Exploratory Data Analysis – NASSCOM</li>
+      <li>Microsoft Azure AI-900</li>
+    </ul></p>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" style="margin-top:26px">
+        <h3>Contact</h3>
+        <div class="grid" style="margin-top:12px">
+          <div class="card" style="min-height:180px">
+            <h4>Get in touch</h4>
+            <p style="color:var(--muted)">Email me at <strong>udaykirangali2@gmail.com</strong> </p>
+                         <p style="color:var(--muted)">Phone no : <strong>8341880177</strong> </p>
+            <div style="margin-top:12px">
+              <strong>Quick contacts</strong>
+              <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
+                <a class="pill" href="mailto:udaykiran.gali@example.com">Email</a>
+                <a class="pill" href="https://github.com/galiudaykiran" target="_blank" rel="noopener">GitHub</a>
+                <a class="pill" href="https://www.linkedin.com/in/udaykiran-gali-522925285/" target="_blank" rel="noopener">LinkedIn</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h4>Message me</h4>
+            <form class="contact-form" id="contactForm" onsubmit="return handleContact(event)">
+              <input type="text" id="name" name="name" placeholder="Your name" required />
+              <input type="email" id="email" name="email" placeholder="Your email" required />
+              <textarea id="message" name="message" placeholder="Message"></textarea>
+              <button class="btn-send" type="submit">Send Message</button>
+            </form>
+            <p id="contactStatus" style="color:var(--muted);margin-top:8px;font-size:13px"></p>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        <div>Made with ❤️ by <strong>Udaykiran Gali</strong> • <a href="https://github.com/galiudaykiran" target="_blank" rel="noopener">github.com/galiudaykiran</a></div>
+        <div style="margin-top:6px">Tip: Replace placeholder email with your real email and add a real profile image for best results.</div>
+      </footer>
+    </main>
+  </div>
+
+<script>
+  /* -----------------------
+     Resume PDF Download + Contact Handler + Smooth Nav
+     ----------------------- */
+
+  // resume download handler (PDF)
+  document.getElementById('downloadResume').addEventListener('click', function(){
+    const pdfPath = "udayresunme__latest.pdf"; // 🔹 replace with your actual path, e.g. "assets/udayprofile.pdf"
+    const a = document.createElement('a');
+    a.href = pdfPath;
+    a.download = "udayresunme__latest.pdf";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  });
+
+  // contact form handler (no backend) — copies to clipboard
+  function handleContact(e){
+    e.preventDefault();
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const message = document.getElementById('message').value.trim();
+    const status = document.getElementById('contactStatus');
+
+    const summary = `Contact message from ${name} <${email}>:\n\n${message}\n\n(Use your backend or mailto to actually send this.)`;
+
+    if (navigator.clipboard){
+      navigator.clipboard.writeText(summary).then(()=>{
+        status.style.color = 'lightgreen';
+        status.textContent = 'Message copied to clipboard. Paste it into your email client to send (or wire up a backend).';
+      }, ()=>{
+        status.style.color = '#ffd166';
+        status.textContent = 'Could not copy automatically. Please configure a backend to send messages.';
+      });
+    } else {
+      status.style.color = '#ffd166';
+      status.textContent = 'Clipboard not available in this browser. Please configure a backend to send messages.';
+    }
+
+    const btn = e.target.querySelector('.btn-send');
+    btn.textContent = 'Copied ✓';
+    setTimeout(()=> btn.textContent = 'Send Message', 2200);
+
+    return false;
+  }
+
+  // smooth scrolling for nav
+  document.querySelectorAll('a[href^="#"]').forEach(a=>{
+    a.addEventListener('click', e=>{
+      const href = a.getAttribute('href');
+      if (href.length > 1){
+        e.preventDefault();
+        const el = document.querySelector(href);
+        if (el) el.scrollIntoView({behavior:'smooth', block:'start'});
+      }
+    })
+  });
+
+  // shortcut key: press R to download resume
+  document.addEventListener('keydown', function(e){
+    if (e.key.toLowerCase() === 'r' && !e.ctrlKey && !e.metaKey){
+      document.getElementById('downloadResume').click();
+    }
+  });
+</script>
+
 </body>
 </html>
